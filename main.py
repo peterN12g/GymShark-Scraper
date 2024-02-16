@@ -1,24 +1,26 @@
 import json
+import os
+import json
 import requests
 from bs4 import BeautifulSoup
 import http.client
 import urllib
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
-USER_TOKEN = os.environ.get(USER_TOKEN)
-API_KEY = os.environ.get(API_KEY)
+API_TOKEN = os.environ.get("API_TOKEN")
+USER_KEY = os.environ.get("USER_KEY")
 
 def send_notification(name, price):
     conn = http.client.HTTPSConnection("api.pushover.net:443")
     conn.request("POST", "/1/messages.json",
                  urllib.parse.urlencode({
                      "token": API_KEY,
-                     "user": USER_TOKEN,
+                     "user": USER_KEY,
                      "message": f"Price drop: {name} - {price}!",
                  }), {"Content-type": "application/x-www-form-urlencoded"})
     response = conn.getresponse()
+    print(f"Notification response: {response.status} - {response.reason}")
 
 def scrape_and_notify():
     url_black_shorts = "https://www.gymshark.com/products/gymshark-react-5-short-black-ss23"
