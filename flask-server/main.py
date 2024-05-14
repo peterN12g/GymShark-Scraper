@@ -55,6 +55,7 @@ def scrape_and_notify():
     # if priceInt_legacy_tee_grey is not None and priceInt_legacy_tee_grey < target_price_legacy_tee_grey:
     #     send_notification(name_legacy_tee_grey, price_legacy_tee_grey)
     #     print("Notification sent!")
+    return(name_black_shorts,price_black_shorts)
 
 if __name__ == "__main__":
     scrape_and_notify()

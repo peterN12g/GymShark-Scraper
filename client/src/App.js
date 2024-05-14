@@ -15,15 +15,16 @@ function App() {
       }
     )
   }, [])
+
   return (
       <div>
-
-        {(typeof data.members == 'undefined') ? (
+        {Object.keys(data).length === 0 ? (
           <p>Loading....</p>
         ) : (
-          data.members.map((member, i) => (
-            <p key={i}>{member}</p>
-          ))
+          <div>
+            <p>Item Name: {data['item-name']}</p>
+            <p>Item Price: {data['item-price']}</p>
+          </div>
         )}
 
       </div>
