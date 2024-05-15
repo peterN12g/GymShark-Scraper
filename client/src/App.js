@@ -26,7 +26,6 @@ function App() {
             <p>Item Price: {data['item-price']}</p>
           </div>
         )}
-
       </div>
   )
 }
