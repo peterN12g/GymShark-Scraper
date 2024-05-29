@@ -1,16 +1,15 @@
 from flask import Flask
-from main import scrape_and_notify
+from main import product_scrape
 
 app = Flask(__name__)
 
 # Members API Route
 @app.route("/members")
 def members():
-    name, price = scrape_and_notify()
+    products = product_scrape()
     
     response = {
-        'item-name': name,
-        'item-price':price
+        'product': products,
     }
     return response
 
