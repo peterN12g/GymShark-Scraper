@@ -37,7 +37,7 @@ function App() {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  }, [checkForNewProducts]);
+  }, []);
 
   return (
     <div className="App">
