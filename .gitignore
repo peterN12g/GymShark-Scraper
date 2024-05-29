@@ -23,3 +23,4 @@ client/public/logo192.png
 client/public/logo512.png
 client/public/robots.txt
 client/public/favicon.ico
+node_modules
