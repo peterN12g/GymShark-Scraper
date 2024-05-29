@@ -4,19 +4,6 @@ function App() {
   const [data, setData] = useState([]);
   const [previousProducts, setPreviousProducts] = useState([]);
 
-  const checkForNewProducts = (currentProducts) => {
-    if (previousProducts.length === 0) {
-      setPreviousProducts(currentProducts);
-    } else {
-      const newProducts = currentProducts.filter(product => !previousProducts.some(prev => prev.title === product.title));
-
-      if (newProducts.length > 0){
-        sendNotification(newProducts);
-      }
-      setPreviousProducts(currentProducts);
-    }
-  }
-
   const sendNotification = (newProducts) => {
     if (Notification.permission === 'granted') {
       newProducts.forEach(product => {
@@ -28,6 +15,19 @@ function App() {
   }
 
   useEffect(() => {
+    const checkForNewProducts = (currentProducts) => {
+      if (previousProducts.length === 0) {
+        setPreviousProducts(currentProducts);
+      } else {
+        const newProducts = currentProducts.filter(product => !previousProducts.some(prev => prev.title === product.title));
+  
+        if (newProducts.length > 0){
+          sendNotification(newProducts);
+        }
+        setPreviousProducts(currentProducts);
+      }
+    }
+
     fetch("/members")
       .then(res => res.json())
       .then(data => {
