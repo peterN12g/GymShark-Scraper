@@ -4,18 +4,6 @@ function App() {
   const [data, setData] = useState([]);
   const [previousProducts, setPreviousProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("/members")
-      .then(res => res.json())
-      .then(data => {
-        setData(data.product);
-        checkForNewProducts(data.prodct);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, [checkForNewProducts]);
-
   const checkForNewProducts = (currentProducts) => {
     if (previousProducts.length === 0) {
       setPreviousProducts(currentProducts);
@@ -39,6 +27,17 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    fetch("/members")
+      .then(res => res.json())
+      .then(data => {
+        setData(data.product);
+        checkForNewProducts(data.prodct);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, [checkForNewProducts]);
 
   return (
     <div className="App">
