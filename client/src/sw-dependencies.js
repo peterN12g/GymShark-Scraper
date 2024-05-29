@@ -13,7 +13,7 @@
 
  export const requestNotificationPermission = async () => {
     const permission = await Notification.requestPermission()
-    if (permission != 'granted'){
+    if (permission !== 'granted'){
       throw new Error('Notification permission not granted')
     }else{
       new Notification('Notifications Granted!')
