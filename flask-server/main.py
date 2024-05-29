@@ -76,12 +76,48 @@ def product_scrape():
         title_tag = product.find('a', class_='product-card_product-title-link__7fUTe')
         if title_tag:
             title = title_tag.get('title')
-            print(title)
         else:
             title = 'Title not found'
-        # color_tag = product.find('p')
         
+        color_tag = product.find('p', class_='product-card_product-colour__JApvJ')
+        if color_tag:
+            color = color_tag.text.strip()
+        else:
+            color = 'Color not found'
+        
+        price_container = product.find('div', class_='product-card_price-container__9HpcE')
+        if price_container:
+            price_tag = price_container.find('span', class_='product-card_product-price__bNBmg')
+            if price_tag:
+                price = price_tag.text.strip()
+                price = float(''.join(filter(str.isdigit, price))) / 100
+            else:
+                price = 'Price not found'
+            
+            compare_price_tag = price_container.find('span', class_='product-card_compare-at-price__2MQSu')
+            if compare_price_tag:
+                compare_price = compare_price_tag.text.strip()
+                compare_price = float(''.join(filter(str.isdigit, compare_price))) / 100
+            else:
+                compare_price = 'Compare price not found'
+                    
+        if title_tag and color_tag and price_container:
+            name = title + ' ' + color
+            discount_percentage = 100 - ((price/compare_price))
+            discount = f"{discount_percentage:.0f}% off"
+            print(f'Name: {name}')
+            print(f'Price: {price}')
+            print(f'Discount: {discount}')
+            print('----------------------')
+            
+            products.append({
+                'title': name,
+                'price': price,
+                'discount': discount 
+            })
+        
+    return products
 
 if __name__ == "__main__":
     # scrape_and_notify()
-    product_scrape()
+    scraped_products = product_scrape()
