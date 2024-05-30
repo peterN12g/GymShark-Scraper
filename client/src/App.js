@@ -28,7 +28,7 @@ function App() {
       }
     }
 
-    fetch("http://34.122.224.207/members")
+    fetch("https://34.122.224.207/members")
       .then(res => res.json())
       .then(data => {
         setData(data.product);
