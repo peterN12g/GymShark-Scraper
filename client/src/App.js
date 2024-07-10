@@ -28,11 +28,11 @@ function App() {
       }
     }
 
-    fetch("/members")
+    fetch("https://gymscraper.peternguyen.tech/members")
       .then(res => res.json())
       .then(data => {
         setData(data.product);
-        checkForNewProducts(data.prodct);
+        checkForNewProducts(data.product);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
