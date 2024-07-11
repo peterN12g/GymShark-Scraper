@@ -28,7 +28,7 @@ function App() {
       }
     }
 
-    fetch("https://gymscraper.peternguyen.tech/members")
+    fetch("/members")
       .then(res => res.json())
       .then(data => {
         setData(data.product);
