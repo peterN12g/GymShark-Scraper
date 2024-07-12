@@ -1,7 +1,10 @@
 from flask import Flask
 from main import product_scrape
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app, resources={r"/members": {"origins": ["https://gymshark-scraper.peternguyen.tech"]}})
 
 # Members API Route
 @app.route("/members")
