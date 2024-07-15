@@ -25,6 +25,12 @@ def product_scrape():
         else:
             title = 'Title not found'
         
+        link_tag = product.find('a', class_='product-card_product-title-link__7fUTe')
+        if link_tag:
+            link = link_tag.get('href')
+        else:
+            link = 'Link not found'
+        
         color_tag = product.find('p', class_='product-card_product-colour__JApvJ')
         if color_tag:
             color = color_tag.text.strip()
@@ -47,23 +53,20 @@ def product_scrape():
             else:
                 compare_price = 'Compare price not found'
                     
-        if title_tag and color_tag and price_container:
+        if title_tag and color_tag and price_container and link_tag:
             name = title + ' ' + color
             discount_percentage = 100 - ((price/compare_price))
             discount = f"{discount_percentage:.0f}% off"
-            print(f'Name: {name}')
-            print(f'Price: {price}')
-            print(f'Discount: {discount}')
-            print('----------------------')
+            source = link
             
             products.append({
                 'title': name,
                 'price': price,
-                'discount': discount 
+                'discount': discount, 
+                'source': source
             })
         
     return products
 
 if __name__ == "__main__":
-    # scrape_and_notify()
     scraped_products = product_scrape()
