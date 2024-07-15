@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css'
 
 function App() {
   const [data, setData] = useState([]);
@@ -44,10 +45,11 @@ function App() {
       <h1>Product List</h1>
       <ul>
         {data.map((product, index) => (
-          <li key={index}>
+          <li class="productList" key={index}>
             <h2>{product.title}</h2>
             <p>Price: ${product.price}</p>
             <p>Discount: {product.discount}</p>
+            <p>Link: <a href={product.source}>{product.source}</a></p>
           </li>
         ))}
       </ul>
